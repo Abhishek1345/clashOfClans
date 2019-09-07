@@ -1,0 +1,52 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+class Barbarian extends JComponent implements ActionListener{
+    int x,y,speedX=0,speedY=0;
+    Timer t=new Timer(5,this);
+    int targetX=100,targetY=150;
+    
+    @Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        Toolkit t=Toolkit.getDefaultToolkit();  
+        Image i=t.getImage("C:/Users/ashut/Desktop/barbarian.png");  
+        g.drawImage(i,x,y,50,50,this);
+        this.t.start();
+    }
+    
+    public Barbarian(int x,int y){
+        this.x=x;
+        this.y=y;
+    }
+    public void actionPerformed(ActionEvent e){
+        x+=speedX;
+        y+=speedY;
+        repaint();
+    }
+    public void attack(){
+        while(!(new Rectangle(x,y,50,50)).intersects(new Rectangle(targetX,targetY,50,50))){
+           
+             if(y<targetY){
+                speedY=1;
+                speedX=0;
+            }
+            else if(y>targetY){
+                speedY=-1;
+                speedX=0;
+            }
+             else if(x<targetX){
+                speedY=0;
+                speedX=1;
+            }
+            else if(x>targetX){
+                speedX=-1;
+                speedY=0;
+            }
+        }
+        speedX=0;
+        speedY=0;
+    }
+            
+}

@@ -1,0 +1,29 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+class Canon extends JComponent{
+    int x,y;
+    
+    int targetX=100,targetY=150;
+    
+    @Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        Toolkit t=Toolkit.getDefaultToolkit();  
+        Image i=t.getImage("C:/Users/ashut/Desktop/canon.png"); 
+        Graphics2D g2d=(Graphics2D)g;
+        g2d.rotate(Math.toRadians(90));
+        g2d.drawImage(i,x,y,50,50,this);
+        
+        
+    }
+    
+    public Canon(int x,int y){
+        this.x=x;
+        this.y=y;
+    }
+    
+    
+            
+}
