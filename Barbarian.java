@@ -11,7 +11,7 @@ class Barbarian extends JComponent implements ActionListener{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Toolkit t=Toolkit.getDefaultToolkit();  
-        Image i=t.getImage("C:/Users/ashut/Desktop/barbarian.png");  
+        Image i=t.getImage("https://github.com/Abhishek1345/clashOfClans/blob/master/barbarian.png");  
         g.drawImage(i,x,y,50,50,this);
         this.t.start();
         
