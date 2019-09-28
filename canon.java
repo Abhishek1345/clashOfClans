@@ -13,7 +13,7 @@ class Canon extends JComponent implements ActionListener{
       
         super.paintComponent(g);
         Toolkit t=Toolkit.getDefaultToolkit();  
-        Image i=t.getImage("C:/Users/ashut/Desktop/canon.png"); 
+        Image i=t.getImage("https://github.com/Abhishek1345/clashOfClans/blob/master/canon.png"); 
         
         
         g.drawImage(i,x,y,50,50,this);
