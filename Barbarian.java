@@ -59,6 +59,7 @@ class Barbarian extends JComponent implements ActionListener{
             }
         }
         target.underAttack=true;
+    
     }
             
 }
