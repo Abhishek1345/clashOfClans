@@ -1,8 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-
-class Game extends MouseAdapter{
+public class Game extends MouseAdapter{
     JFrame f;
     public  void setUp(){
         try{
@@ -63,3 +62,102 @@ class Game extends MouseAdapter{
 }
 
 }
+class Canon extends JComponent implements ActionListener{
+    int x,y;
+    
+   boolean underAttack=false;
+    int life=20;
+    Timer t=new Timer(5,this);
+    @Override
+    public void paintComponent(Graphics g){
+      
+        super.paintComponent(g);
+        Toolkit t=Toolkit.getDefaultToolkit();  
+        Image i=t.getImage("./canon.png"); 
+        
+        
+        g.drawImage(i,x,y,50,50,this);
+        if(underAttack){
+            drawHealthBar(g);
+        }
+        
+    }
+        
+    
+    
+    public Canon(int x,int y){
+        this.x=x;
+        this.y=y;
+    }
+    public void actionPerformed(ActionEvent e){
+        repaint();
+    }
+    public void drawHealthBar(Graphics g){
+        g.setColor(Color.GREEN);
+        g.fillRect(x,y-15,life,10);
+    }   
+            
+}
+
+class Barbarian extends JComponent implements ActionListener{
+    int x,y,speedX=0,speedY=0;
+    Timer t=new Timer(5,this);
+    int targetX=100,targetY=150;
+    Canon target;
+    @Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        Toolkit t=Toolkit.getDefaultToolkit();  
+        Image i=t.getImage("./barbarian.png");  
+        g.drawImage(i,x,y,50,50,this);
+        this.t.start();
+        
+    }
+    
+    public Barbarian(int x,int y){
+        this.x=x;
+        this.y=y;
+    }
+    public void actionPerformed(ActionEvent e){
+        x+=speedX;
+        y+=speedY;
+        repaint();
+    }
+    public void attack(){
+        approach();
+        speedX=0;
+        speedY=0;
+        while(target.life!=0){
+            try{
+            target.life--;
+            Thread.sleep(500);
+        }catch(Exception e){}
+    }
+}
+    
+    public void approach(){
+        while(!(new Rectangle(x,y,50,50)).intersects(new Rectangle(targetX,targetY,50,50))){
+           
+             if(y<targetY){
+                speedY=1;
+                
+            }
+            else if(y>targetY){
+                speedY=-1;
+                
+            }
+             if(x<targetX){
+               
+                speedX=1;
+            }
+            else if(x>targetX){
+                speedX=-1;
+                
+            }
+        }
+        target.underAttack=true;
+    
+    }
+            
+}
+
